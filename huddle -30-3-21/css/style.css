@@ -80,11 +80,9 @@
   background: #00252e;
 }
 
-.footer h1 {
-  color: #fff;
-}
-
-.footer p {
+.footer h1,
+h2,
+p {
   color: #fff;
 }
 
