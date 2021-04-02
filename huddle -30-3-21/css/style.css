@@ -1,0 +1,101 @@
+.header-block {
+  padding-top: 50px;
+}
+.btn-trynow {
+  border-radius: 8px;
+  border: 1px solid #ff52c1;
+  background-color: #fff;
+  color: #ff52c1;
+  padding: 1px 4px;
+  float: right;
+}
+.build-block {
+  text-align: center;
+  padding-top: 100px;
+}
+
+.build-block h1 {
+  font-weight: 700;
+}
+
+.build-block span {
+  font-weight: 400;
+}
+
+.para-section {
+  text-align: center;
+  font-weight: 100;
+}
+.but-start {
+  border-radius: 20px;
+  background-color: #ff52c1;
+  border: 1px solid #ff52c1;
+  color: #fff;
+  font-size: 12px;
+  box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 1px 2px 3px 0px rgba(0, 0, 0, 0.75);
+}
+.section-card-2 {
+  height: auto;
+  width: auto;
+}
+
+.grow-together {
+  height: 100%;
+  width: 100%;
+}
+
+.number-card {
+  padding: 0px 25%;
+}
+
+.number-card img {
+  height: 30px;
+}
+
+.number-card h1 {
+  font-size: 6em;
+  font-weight: 600;
+}
+
+.number-card p {
+  color: #8d8e90;
+}
+
+.sec-4 {
+  background: #f6fbff;
+}
+
+.sec-4 h1 {
+  font-weight: 600;
+  padding: 20px 0px;
+}
+
+.sec-4 p {
+  font-weight: 500;
+}
+
+.footer {
+  background: #00252e;
+}
+
+.footer h1 {
+  color: #fff;
+}
+
+.footer p {
+  color: #fff;
+}
+
+.footer span {
+  color: #fff;
+  font-size: 10px;
+  line-height: 2px;
+}
+
+@media screen and (max-width: 600px) {
+  .number-card h1 {
+    font-size: 4em;
+  }
+}
