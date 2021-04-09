@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bootstrap 4 Website Example</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+</head>
+
+<body>
+    <!-- section header 1st start.... -->
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <div class="section-head">
+                    <h2>Products <button data-toggle="modal" data-target="#myModal">Add Products</button></h2>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end header section -->
+
+    <div class="container">
+        <div class="row">
+            <!-- Left Menu -->
+            <div class="col-12 col-sm-3 col-md-3">
+                <div class="left-menu">
+                    <b>Categories</b>
+                    <div class="menu-list">
+                        <p>books</p>
+                        <p>Hoodie</p>
+                        <p>Bags</p>
+                        <p>Msic</p>
+                    </div>
+
+                    <p>Filter by Price:</p>
+                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    <button>filter</button><span class="float-right py-3">price $29-$599</span>
+                    <h3>Top product </h3>
+                    <div class="left-menu-2 my-5">
+                        <section class="row">
+                            <div class="col-4">
+                                <img src="./mug.png">
+                            </div>
+                            <div class="col-8">
+                                <h6>Mug Mockups</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="row">
+                            <div class="col-4">
+                                <img src="./t-shirt.jpg">
+                            </div>
+                            <div class="col-8">
+                                <h6>T-shirt blue</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </section>
+                        <section class="row">
+                            <div class="col-4">
+                                <img src="./hard cover book.webp">
+                            </div>
+                            <div class="col-8">
+                                <h6>Hard cover book</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </section>
+
+
+
+
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <!-- Right Section -->
+            <div class="col-12 col-sm-9 col-md-9">
+                <div class="product-list">
+                    <p>Showing 1-8 results
+                        <select>
+                            <optgroup label="Swedish Cars">
+                                <option value="volvo">Defult sorting</option>
+                                <option value="saab">Saab</option>
+                            </optgroup>
+                            <optgroup label="German Cars">
+                                <option value="mercedes">Mercedes</option>
+                                <option value="audi">Audi</option>
+                            </optgroup>
+                        </select>
+                    </p>
+                    <div class="row">
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./8853128773662.webp" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Bag</h5>
+                                    <p>Rs.700</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
+
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="hoddies-500x500.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Hoodie</h5>
+                                    <p>Rs.400</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./speaker.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Wonderboom</h5>
+                                    <p>Rs.4500</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./shoe.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Shoe</h5>
+                                    <p>Rs.500</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./slipper 2.jpeg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Slipper</h5>
+                                    <p>Rs.250</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./airpod.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Apple earphone</h5>
+                                    <p>Rs.1900</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./glass.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Sun glass</h5>
+                                    <p>Rs.500</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./jean.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Jeans</h5>
+                                    <p>Rs.900</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                        <div class="col-12 col-sm-4">
+                            <div class="card mb-3">
+                                <img src="./t shirt.jpg" alt="Card image cap">
+                                <div class="card-body text-center">
+                                    <h5>Tshirt</h5>
+                                    <p>RS.250</p>
+                                </div>
+                                <br>
+                            </div>
+                        </div>
+                    </div>
+                    <ul class="pagination justify-content-center ">
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Previous">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                        </li>
+                        <li class="page-item"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item">
+                            <a class="page-link" href="#" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </li>
+                    </ul>
+
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    <!-- The Modal -->
+    <div class="modal" id="myModal">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h4 class="modal-title px-10">Add product</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="m-5">
+
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product category</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="select">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Product title</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder=" enter product title">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Price</label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"
+                            placeholder="Enter prize ">
+                        <h6 class="top-product px-4">top product</h6>
+                        <h6>uplode product img</h6>
+                        <button class="btn btn-outline-danger btn-sm">Upload</button>
+                    </div>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-light" data-dismiss="modal">OK</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
+                </div>
+
+            </div>
+
+
+
+        </div>
+    </div>
+    </div>
+
+</body>
+
+</html>
