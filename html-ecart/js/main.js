@@ -23,19 +23,27 @@ getProductList();
 function addProduct(){
     let name = document.getElementById("input-product-name").value
     let price= document.getElementById("input-product-price").value
-    let image= document.getElementById("input-product-image").value
-    
+    let inputFile = document.getElementById("input-product-file").files[0]
 
-    productList.push({
-        name: name,
-        price: price,
-        category: "dress",
-        imgUrl : image
-    })
-    getProductList();
+    const file = inputFile;
+    const reader = new FileReader();
+
+    reader.onloadend = () => {
+        productList.push({
+            name: name,
+            price: price,
+            category: "dress",
+            imgUrl : reader.result
+        })
+        getProductList();
+        
+    };
+
+    reader.readAsDataURL(file);
+
     
    
-
+    
 }
 
 function getProductList(){
