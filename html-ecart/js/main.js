@@ -1,12 +1,14 @@
 var productList = [
     {
-        name: "Bag",
+        name: "back Bag",
         price: 700,
+        category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
     {
         name: "Hoodie",
         price: 400,
+        category : "shirts",
         imgUrl : "./images/hoddies-500x500.jpg"
     }
 ];
@@ -19,12 +21,21 @@ getProductList();
 
 // to add the product's item
 function addProduct(){
+    let name = document.getElementById("input-product-name").value
+    let price= document.getElementById("input-product-price").value
+    let image= document.getElementById("input-product-image").value
+    
+
     productList.push({
-        name: "Wonderboom",
-        price: 5500,
-        imgUrl : "./images/speaker.jpg"
+        name: name,
+        price: price,
+        category: "dress",
+        imgUrl : image
     })
     getProductList();
+    
+   
+
 }
 
 function getProductList(){
