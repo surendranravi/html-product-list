@@ -21,7 +21,8 @@
         <div class="row">
             <div class="col-12">
                 <div class="section-head">
-                    <h2>Products <button data-toggle="modal" data-target="#myModal">Add Products</button></h2>
+                    <h2>Products <button data-toggle="modal" data-target="#myModal">Add
+                            Products</button></h2>
                 </div>
             </div>
         </div>
@@ -92,10 +93,6 @@
                             </div>
                         </section>
 
-
-
-
-
                     </div>
 
                 </div>
@@ -136,9 +133,6 @@
 
                 </div>
             </div>
-
-
-
 
         </div>
     </div>
@@ -184,12 +178,13 @@
                             aria-describedby="emailHelp" placeholder="enter product title">
                     </div>
                     <div class="form-group">
-
                         <label for="exampleInputEmail1">Price</label>
                         <input type="number" class="form-control btn-light" id="input-product-price"
                             aria-describedby="emailHelp" placeholder="Enter price ">
                         <br>
-                        <input type="file" class="form-group" id="input-product-file" name="filename">
+                        <label for="exampleInputEmail1">Upload product image</label><br>
+                        <input type="file" class="d-none" id="input-product-file" name="filename">
+                        <button class="btn btn-outline-danger btn-sm" onclick="uploadBtn()">Upload</button>
                     </div>
                     <hr>
                     <div class="text-center">

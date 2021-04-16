@@ -40,9 +40,6 @@ function addProduct(){
     };
 
     reader.readAsDataURL(file);
-
-    
-   
     
 }
 
@@ -61,7 +58,13 @@ function getProductList(){
             </div>
         </div>`
     })
+
 document.getElementById('product-item').innerHTML = productItem
+}
+
+
+function uploadBtn(){
+    document.getElementById("input-product-file").click()
 }
 
 
