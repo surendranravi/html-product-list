@@ -6,17 +6,17 @@ var productList = [
         imgUrl : "./images/shoe.jpg"
     },
     {
+        name: "Hoodie",
+        price: 400,
+        category : "shirts",
+        imgUrl : "./images/hoddies-500x500.jpg"
+    },
+    {
         name: "back Bag",
         price: 700,
         category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
-    {
-        name: "Hoodie",
-        price: 400,
-        category : "shirts",
-        imgUrl : "./images/hoddies-500x500.jpg"
-    }
 ];
 
 document.getElementById('product-total').innerHTML = productList.length;
@@ -25,11 +25,22 @@ document.getElementById('product-total').innerHTML = productList.length;
 getProductList();
 
 
+// document.querySelector("addProductForm").addEventListener("click", function(event) {
+//          event.preventDefault();
+// }, false);
+
 // to add the product's item
 function addProduct(){
-    let name = document.getElementById("input-product-name").value
+  
+   let name = document.getElementById("input-product-name").value;
     let price= document.getElementById("input-product-price").value
-    let inputFile = document.getElementById("input-product-file").files[0]
+    let inputFile = document.getElementById("input-product-file").files[0];
+
+    if(!name || !price || !inputFile){
+        document.getElementById("errormsg").innerHTML = "Please fill out this field";
+        return
+    }
+
     const file = inputFile;
     const reader = new FileReader();
 
@@ -45,6 +56,13 @@ function addProduct(){
     };
 
     reader.readAsDataURL(file);
+
+     document.getElementById("input-product-name").value = null
+    document.getElementById("input-product-price").value = null
+    document.getElementById("input-product-file").value = null ;
+    document.getElementById("errormsg").innerHTML = "";
+  
+    document.getElementById("cancelBtn").click()
     
 }
 
@@ -80,7 +98,7 @@ function getProductList(){
 document.getElementById('product-item').innerHTML = productItem
 }
 
-
+ 
 
 function uploadBtn(){
     document.getElementById("input-product-file").click()
