@@ -1,5 +1,11 @@
 var productList = [
     {
+        name: "nike shoe",
+        price: 1500,
+        category : "shoe",
+        imgUrl : "./images/shoe.jpg"
+    },
+    {
         name: "back Bag",
         price: 700,
         category: "bag",
@@ -24,7 +30,6 @@ function addProduct(){
     let name = document.getElementById("input-product-name").value
     let price= document.getElementById("input-product-price").value
     let inputFile = document.getElementById("input-product-file").files[0]
-
     const file = inputFile;
     const reader = new FileReader();
 
@@ -42,6 +47,19 @@ function addProduct(){
     reader.readAsDataURL(file);
     
 }
+
+function sortProduct(){
+    var range = document.getElementById('sortingRange').value;
+    
+    if(range == 'low'){
+        productList = productList.sort((obj)=> obj.price)
+    }
+    if(range == 'high'){
+    productList = productList.reverse((obj)=> obj.price);
+    }
+    getProductList();
+}
+
 
 function getProductList(){
      var productItem = ''
@@ -61,6 +79,7 @@ function getProductList(){
 
 document.getElementById('product-item').innerHTML = productItem
 }
+
 
 
 function uploadBtn(){
