@@ -23,6 +23,7 @@
                 <div class="section-head">
                     <h2>Products <button data-toggle="modal" data-target="#myModal">Add
                             Products</button></h2>
+
                 </div>
             </div>
         </div>
@@ -105,6 +106,7 @@
                 <div class="product-list">
                     <p>Showing 1-<span id="product-total"> </span> results
                         <select id="sortingRange" onchange="sortProduct()">
+                            <option value="">Default sorting</option>
                             <option value="low">Low to high</option>
                             <option value="high">High to low</option>
                         </select>
@@ -166,14 +168,23 @@
                         <label for="input-product-name">Product title</label>
                         <input type="text" class="form-control btn-light" id="input-product-name"
                             aria-describedby="emailHelp" placeholder="enter product title">
+                        <sub id="error-msg-title" class="text-danger"></sub>
                     </div>
                     <div class="form-group">
                         <label for="exampleInputEmail1">Price</label>
                         <input type="number" class="form-control btn-light" id="input-product-price"
                             aria-describedby="emailHelp" placeholder="Enter price ">
+                        <sub id="error-msg-price" class="text-danger"></sub>
                         <br>
                         <label for="exampleInputEmail1">Upload product image</label><br>
-                        <input type="file" class="d-none" id="input-product-file" name="filename">
+                        <input type="file" class="d-none" id="input-product-file" onchange="getFileName()"
+                            name="filename">
+                        <sub id="error-msg-file" class="text-danger"></sub>
+
+                        <p class="text-info" id="fileName"></p>
+
+
+
                         <button class="btn btn-outline-danger btn-sm" onclick="uploadBtn()">Upload</button>
                     </div>
                     <p id="errormsg" class="text-center text-primary"></p>

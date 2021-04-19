@@ -17,14 +17,29 @@ var productList = [
         category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
+     {
+        name: "slipper",
+        price: 300,
+        category: "shoe",
+        imgUrl : "./images/slipper.jpg"
+    },
+     {
+        name: "wonderboom",
+        price: 700,
+        category: "speaker",
+        imgUrl : "./images/speaker.jpg"
+    },
+    
+
+
 ];
 
+document.getElementById("sortingRange").value = "";
 document.getElementById('product-total').innerHTML = productList.length;
+document.getElementById("input-product-file").value = null;
+document.getElementById("input-product-name").value  = null;
+document.getElementById("input-product-price").value = null;
 
-productList = productList.sort(function(a,b){
-            return a.price - b.price;
-            }
-        );
 
 // product listing in onload 
 getProductList();
@@ -41,10 +56,26 @@ function addProduct(){
     let price= document.getElementById("input-product-price").value
     let inputFile = document.getElementById("input-product-file").files[0];
 
-    if(!name || !price || !inputFile){
-        document.getElementById("errormsg").innerHTML = "Please fill out this field";
+    if(!name){
+        document.getElementById("error-msg-title").innerHTML = "Please Enter the Title";
         return
     }
+     document.getElementById("error-msg-title").innerHTML = "";
+
+
+    if(!price){
+        document.getElementById("error-msg-price").innerHTML = "Please Enter the Price";
+        return
+    }
+    document.getElementById("error-msg-price").innerHTML = "";
+
+    if(!inputFile){
+        document.getElementById("error-msg-file").innerHTML = "Please Upload the file";
+        return
+    }
+    document.getElementById("error-msg-file").innerHTML = "";
+
+    
 
     const file = inputFile;
     const reader = new FileReader();
@@ -66,23 +97,28 @@ function addProduct(){
     document.getElementById("input-product-price").value = null
     document.getElementById("input-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
-  
+    document.getElementById('fileName').innerHTML = "";
     document.getElementById("cancelBtn").click()
     
 }
 
+function getFileName(){
+    let file = document.getElementById('input-product-file')
+    document.getElementById('fileName').innerHTML = file.files[0].name
+     document.getElementById('error-msg-file').innerHTML = ""
+}
+
 function sortProduct(){
     var range = document.getElementById('sortingRange').value;
-    
     if(range == 'low'){
         productList = productList.sort(function(a,b){
-            return b.price - a.price;
+            return a.price - b.price;
             }
         );
     }
     if(range == 'high'){
         productList = productList.sort(function(a,b){
-            return a.price - b.price;
+            return b.price - a.price;
             }
         );
     }
