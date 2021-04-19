@@ -5,7 +5,7 @@ var productList = [
         category : "shoe",
         imgUrl : "./images/shoe.jpg"
     },
-    {
+     {
         name: "Hoodie",
         price: 400,
         category : "shirts",
@@ -20,6 +20,11 @@ var productList = [
 ];
 
 document.getElementById('product-total').innerHTML = productList.length;
+
+productList = productList.sort(function(a,b){
+            return a.price - b.price;
+            }
+        );
 
 // product listing in onload 
 getProductList();
@@ -57,7 +62,7 @@ function addProduct(){
 
     reader.readAsDataURL(file);
 
-     document.getElementById("input-product-name").value = null
+    document.getElementById("input-product-name").value = null
     document.getElementById("input-product-price").value = null
     document.getElementById("input-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
@@ -70,10 +75,16 @@ function sortProduct(){
     var range = document.getElementById('sortingRange').value;
     
     if(range == 'low'){
-        productList = productList.sort((obj)=> obj.price)
+        productList = productList.sort(function(a,b){
+            return b.price - a.price;
+            }
+        );
     }
     if(range == 'high'){
-    productList = productList.reverse((obj)=> obj.price);
+        productList = productList.sort(function(a,b){
+            return a.price - b.price;
+            }
+        );
     }
     getProductList();
 }
