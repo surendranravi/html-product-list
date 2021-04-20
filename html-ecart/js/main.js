@@ -28,11 +28,26 @@ var productList = [
         price: 700,
         category: "speaker",
         imgUrl : "./images/speaker.jpg"
-    },
-    
-
-
+    }
 ];
+
+var category = ['Books', 'Shoes', 'Speakers', 'clothes']
+
+ var categoryItem = '';
+    category.forEach((obj, index)=> {
+        categoryItem += `<p>${obj}</p>`
+    })
+
+document.getElementById('category-list').innerHTML = categoryItem
+
+    var dropdownlist = '';
+
+    category.forEach((obj, index)=> {
+        dropdownlist += `<option>${obj}</option>`
+    })
+document.getElementById('categoryListSelect').innerHTML = dropdownlist  
+
+
 
 document.getElementById("sortingRange").value = "";
 document.getElementById('product-total').innerHTML = productList.length;
@@ -150,5 +165,6 @@ document.getElementById('product-item').innerHTML = productItem
 function uploadBtn(){
     document.getElementById("input-product-file").click()
 }
+
 
 
