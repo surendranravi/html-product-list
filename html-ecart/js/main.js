@@ -8,6 +8,7 @@ var productList = [
      {
         name: "Hoodie",
         price: 400,
+        topProduct: true,
         category : "shirts",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
@@ -26,6 +27,7 @@ var productList = [
      {
         name: "wonderboom",
         price: 700,
+        topProduct: true,
         category: "speaker",
         imgUrl : "./images/speaker.jpg"
     }
@@ -49,7 +51,7 @@ document.getElementById('categoryListSelect').innerHTML = dropdownlist
 
 
 
-document.getElementById("sortingRange").value = "";
+document.getElementById("sortingRange").value = "default";
 document.getElementById('product-total').innerHTML = productList.length;
 document.getElementById("input-product-file").value = null;
 document.getElementById("input-product-name").value  = null;
@@ -57,7 +59,7 @@ document.getElementById("input-product-price").value = null;
 
 
 // product listing in onload 
-getProductList();
+getProductList(productList);
 
 
 // document.querySelector("addProductForm").addEventListener("click", function(event) {
@@ -70,6 +72,7 @@ function addProduct(){
    let name = document.getElementById("input-product-name").value;
     let price= document.getElementById("input-product-price").value
     let inputFile = document.getElementById("input-product-file").files[0];
+    let isTopProduct = document.getElementById('topProduct').checked 
 
     if(!name){
         document.getElementById("error-msg-title").innerHTML = "Please Enter the Title";
@@ -100,21 +103,18 @@ function addProduct(){
             name: name,
             price: price,
             category: "dress",
+            topProduct : isTopProduct,
             imgUrl : reader.result
         })
-        getProductList();
-        
+        getProductList(productList);    
     };
-
     reader.readAsDataURL(file);
-
     document.getElementById("input-product-name").value = null
     document.getElementById("input-product-price").value = null
     document.getElementById("input-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
     document.getElementById('fileName').innerHTML = "";
     document.getElementById("cancelBtn").click()
-    
 }
 
 function getFileName(){
@@ -125,26 +125,34 @@ function getFileName(){
 
 function sortProduct(){
     var range = document.getElementById('sortingRange').value;
+    var sortedProduct = [];
+    let products =  JSON.parse(JSON.stringify(productList)) ;
     if(range == 'low'){
-        productList = productList.sort(function(a,b){
+        sortedProduct = products.sort(function(a,b){
             return a.price - b.price;
             }
         );
     }
     if(range == 'high'){
-        productList = productList.sort(function(a,b){
+        sortedProduct = products.sort(function(a,b){
             return b.price - a.price;
             }
         );
     }
-    getProductList();
+    if(range == "default"){
+        sortedProduct = productList
+    }
+
+    getProductList(sortedProduct);
 }
 
 
-function getProductList(){
-     var productItem = ''
-    productList.forEach((obj, index)=> {
-    
+function getProductList(products){
+    // Show Product List 
+    var productItem = '';
+    var topProducts = '';
+    products.forEach((obj, index)=> {
+
     productItem += `<div class="col-12 col-sm-4">
                 <div class="card mb-3">
                 <img src=${obj.imgUrl} alt="Card image cap">
@@ -155,9 +163,33 @@ function getProductList(){
                 <br>
             </div>
         </div>`
-    })
 
-document.getElementById('product-item').innerHTML = productItem
+        if(obj.topProduct){
+
+              topProducts += ` <section class="row py-2">
+                            <div class="col-4">
+                                <img src=${obj.imgUrl}>
+                            </div>
+                            <div class="col-8">
+                                <h6>${obj.name}</h6>
+                                <div class="rating">
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </div>
+                            </div>
+                        </section>`
+
+        }
+
+      
+
+    })
+   document.getElementById('product-item').innerHTML = productItem;
+   document.getElementById('top-products').innerHTML = topProducts; 
+
 }
 
  

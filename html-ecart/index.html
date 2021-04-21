@@ -44,53 +44,7 @@
                     <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
                     <button>filter</button><span class="float-right py-3">price $29-$599</span>
                     <h3>Top product </h3>
-                    <div class="left-menu-2 my-5">
-                        <section class="row">
-                            <div class="col-4">
-                                <img src="./images/mug.png">
-                            </div>
-                            <div class="col-8">
-                                <h6>Mug Mockups</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="row">
-                            <div class="col-4">
-                                <img src="./images/t-shirt.jpg">
-                            </div>
-                            <div class="col-8">
-                                <h6>T-shirt blue</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </section>
-                        <section class="row">
-                            <div class="col-4">
-                                <img src="./image/hard cover book.webp">
-                            </div>
-                            <div class="col-8">
-                                <h6>Hard cover book</h6>
-                                <div class="rating">
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                </div>
-                            </div>
-                        </section>
-
+                    <div class="left-menu-2 my-5" id="top-products">
                     </div>
 
                 </div>
@@ -103,7 +57,7 @@
                 <div class="product-list">
                     <p>Showing 1-<span id="product-total"> </span> results
                         <select id="sortingRange" onchange="sortProduct()">
-                            <option value="">Default sorting</option>
+                            <option value="default">Default sorting</option>
                             <option value="low">Low to high</option>
                             <option value="high">High to low</option>
                         </select>
@@ -169,6 +123,13 @@
                         <input type="number" class="form-control btn-light" id="input-product-price"
                             aria-describedby="emailHelp" placeholder="Enter price ">
                         <sub id="error-msg-price" class="text-danger"></sub>
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="topProduct">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Top Product
+                            </label>
+                        </div>
                         <br>
                         <label for="exampleInputEmail1">Upload product image</label><br>
                         <input type="file" class="d-none" id="input-product-file" onchange="getFileName()"
