@@ -93,7 +93,6 @@ function addProduct(){
     }
     document.getElementById("error-msg-file").innerHTML = "";
 
-    
 
     const file = inputFile;
     const reader = new FileReader();
@@ -114,7 +113,8 @@ function addProduct(){
     document.getElementById("input-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
     document.getElementById('fileName').innerHTML = "";
-    document.getElementById("cancelBtn").click()
+    document.getElementById("cancelBtn").click();
+     document.getElementById('topProduct').checked = false;
 }
 
 function getFileName(){
@@ -143,11 +143,11 @@ function sortProduct(){
         sortedProduct = productList
     }
 
-    getProductList(sortedProduct);
+    getProductList(sortedProduct, true);
 }
 
 
-function getProductList(products){
+function getProductList(products, disableTopProductSort){
     // Show Product List 
     var productItem = '';
     var topProducts = '';
@@ -183,16 +183,13 @@ function getProductList(products){
                         </section>`
 
         }
-
-      
-
     })
    document.getElementById('product-item').innerHTML = productItem;
-   document.getElementById('top-products').innerHTML = topProducts; 
 
+   if(!disableTopProductSort){
+        document.getElementById('top-products').innerHTML = topProducts; 
+   }
 }
-
- 
 
 function uploadBtn(){
     document.getElementById("input-product-file").click()
