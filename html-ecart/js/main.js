@@ -33,7 +33,11 @@ var productList = [
     }
 ];
 
-var category = ['Books', 'Shoes', 'Speakers', 'clothes']
+var category = ['Books', 'Shoes', 'Speakers', 'clothes'];
+
+var pageNo = 1;
+
+var pageSize = 3;
 
  var categoryItem = '';
     category.forEach((obj, index)=> {
@@ -41,22 +45,17 @@ var category = ['Books', 'Shoes', 'Speakers', 'clothes']
     })
 
 document.getElementById('category-list').innerHTML = categoryItem
-
     var dropdownlist = '';
-
     category.forEach((obj, index)=> {
         dropdownlist += `<option>${obj}</option>`
     })
 document.getElementById('categoryListSelect').innerHTML = dropdownlist  
-
-
 
 document.getElementById("sortingRange").value = "default";
 document.getElementById('product-total').innerHTML = productList.length;
 document.getElementById("input-product-file").value = null;
 document.getElementById("input-product-name").value  = null;
 document.getElementById("input-product-price").value = null;
-
 
 // product listing in onload 
 getProductList(productList);
@@ -114,7 +113,7 @@ function addProduct(){
     document.getElementById("errormsg").innerHTML = "";
     document.getElementById('fileName').innerHTML = "";
     document.getElementById("cancelBtn").click();
-     document.getElementById('topProduct').checked = false;
+    document.getElementById('topProduct').checked = false;
 }
 
 function getFileName(){
@@ -146,12 +145,33 @@ function sortProduct(){
     getProductList(sortedProduct, true);
 }
 
+function changePage(number){
+    pageNo = number
+    getProductList(productList)
+}
+
 
 function getProductList(products, disableTopProductSort){
     // Show Product List 
     var productItem = '';
     var topProducts = '';
-    products.forEach((obj, index)=> {
+    console.log(products.length)
+    let totalProduct = Math.ceil(products.length/pageSize);
+    
+    
+    var paginationList = ``
+
+    var i;
+    for (i = 0; i < totalProduct; i++) {
+        paginationList += `<li class="page-item"><button class="page-link" onclick="changePage(${i+1})">${i+1}</button></li>`;
+    } 
+
+    document.getElementById('pagination').innerHTML = paginationList;
+    
+    let endPageNumber = pageNo * pageSize;
+    let startPageNumber = endPageNumber - pageSize ;
+    var slicedproducts = products.slice(startPageNumber, endPageNumber);
+    slicedproducts.forEach((obj, index)=> {
 
     productItem += `<div class="col-12 col-sm-4">
                 <div class="card mb-3">
@@ -163,9 +183,11 @@ function getProductList(products, disableTopProductSort){
                 <br>
             </div>
         </div>`
+    })
+
+     products.forEach((obj, index)=> {
 
         if(obj.topProduct){
-
               topProducts += ` <section class="row py-2">
                             <div class="col-4">
                                 <img src=${obj.imgUrl}>
@@ -184,6 +206,8 @@ function getProductList(products, disableTopProductSort){
 
         }
     })
+
+
    document.getElementById('product-item').innerHTML = productItem;
 
    if(!disableTopProductSort){
