@@ -30,6 +30,37 @@ var productList = [
         topProduct: true,
         category: "speaker",
         imgUrl : "./images/speaker.jpg"
+    }, {
+        name: "nike shoe",
+        price: 1500,
+        category : "shoe",
+        imgUrl : "./images/shoe.jpg"
+    },
+     {
+        name: "Hoodie",
+        price: 400,
+        topProduct: false,
+        category : "shirts",
+        imgUrl : "./images/hoddies-500x500.jpg"
+    },
+    {
+        name: "back Bag",
+        price: 700,
+        category: "bag",
+        imgUrl : "./images/8853128773662.webp"
+    },
+     {
+        name: "slipper",
+        price: 300,
+        category: "shoe",
+        imgUrl : "./images/slipper.jpg"
+    },
+     {
+        name: "wonderboom",
+        price: 700,
+        topProduct: false,
+        category: "speaker",
+        imgUrl : "./images/speaker.jpg"
     }
 ];
 
@@ -37,7 +68,7 @@ var category = ['Books', 'Shoes', 'Speakers', 'clothes'];
 
 var pageNo = 1;
 
-var pageSize = 3;
+var pageSize = 9;
 
  var categoryItem = '';
     category.forEach((obj, index)=> {
