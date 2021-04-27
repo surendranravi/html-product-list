@@ -1,15 +1,15 @@
 var productList = [
     {
-        name: "nike shoe",
+        name: "bike shoe",
         price: 1500,
-        category : "shoe",
+        category : "Shoes",
         imgUrl : "./images/shoe.jpg"
     },
      {
         name: "Hoodie",
         price: 400,
         topProduct: true,
-        category : "shirts",
+        category : "clothes",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
@@ -21,26 +21,26 @@ var productList = [
      {
         name: "slipper",
         price: 300,
-        category: "shoe",
+        category: "Shoes",
         imgUrl : "./images/slipper.jpg"
     },
      {
         name: "wonderboom",
         price: 700,
         topProduct: true,
-        category: "speaker",
+        category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     }, {
         name: "nike shoe",
         price: 1500,
-        category : "shoe",
+        category : "Shoes",
         imgUrl : "./images/shoe.jpg"
     },
      {
         name: "Hoodie",
         price: 400,
         topProduct: false,
-        category : "shirts",
+        category : "clothes",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
@@ -52,27 +52,29 @@ var productList = [
      {
         name: "slipper",
         price: 300,
-        category: "shoe",
+        category: "Shoes",
         imgUrl : "./images/slipper.jpg"
     },
      {
         name: "wonderboom",
         price: 700,
         topProduct: false,
-        category: "speaker",
+        category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     }
 ];
 
-var category = ['Books', 'Shoes', 'Speakers', 'clothes'];
+var category = ['Books', 'Shoes', 'Speakers', 'clothes','bag'];
 
 var pageNo = 1;
 
-var pageSize = 9;
+var selectedCategory;
+
+var pageSize = 2;
 
  var categoryItem = '';
     category.forEach((obj, index)=> {
-        categoryItem += `<p>${obj}</p>`
+        categoryItem += `<p class="pointer" onclick="categoryFilter('${obj}')">${obj}</p>`
     })
 
 document.getElementById('category-list').innerHTML = categoryItem
@@ -177,8 +179,17 @@ function sortProduct(){
 }
 
 function changePage(number){
-    pageNo = number
-    getProductList(productList)
+    pageNo = number;
+    let selectedProducts = productList
+    if(selectedCategory)
+        selectedProducts =  selectedProducts.filter(product => product.category === selectedCategory)
+
+    getProductList(selectedProducts)
+}
+
+function categoryFilter(category){
+    selectedCategory = category;
+    this.changePage(1)
 }
 
 
