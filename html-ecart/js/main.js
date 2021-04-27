@@ -70,7 +70,7 @@ var pageNo = 1;
 
 var selectedCategory;
 
-var pageSize = 2;
+var pageSize = 9;
 
  var categoryItem = '';
     category.forEach((obj, index)=> {
