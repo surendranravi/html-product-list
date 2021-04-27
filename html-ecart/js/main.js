@@ -2,6 +2,7 @@ var productList = [
     {
         name: "bike shoe",
         price: 1500,
+        topProduct: true,
         category : "Shoes",
         imgUrl : "./images/shoe.jpg"
     },
@@ -27,7 +28,6 @@ var productList = [
      {
         name: "wonderboom",
         price: 700,
-        topProduct: true,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     }, {
@@ -39,26 +39,26 @@ var productList = [
      {
         name: "Hoodie",
         price: 400,
-        topProduct: false,
         category : "clothes",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
         name: "back Bag",
         price: 700,
+        topProduct: true,
         category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
      {
         name: "slipper",
         price: 300,
+        topProduct: true,
         category: "Shoes",
         imgUrl : "./images/slipper.jpg"
     },
      {
         name: "wonderboom",
         price: 700,
-        topProduct: false,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     }
@@ -72,12 +72,22 @@ var selectedCategory;
 
 var pageSize = 9;
 
- var categoryItem = '';
-    category.forEach((obj, index)=> {
-        categoryItem += `<p class="pointer" onclick="categoryFilter('${obj}')">${obj}</p>`
-    })
 
-document.getElementById('category-list').innerHTML = categoryItem
+ this.getCategory();
+
+function getCategory(){     
+     var categoryItem = '';
+    category.forEach((obj, index)=> {
+        categoryItem += `<p class=${selectedCategory == obj ? "selected-category" : "pointer" } id='${obj}' onclick="categoryFilter('${obj}')">${obj}</p>`
+    })
+    document.getElementById('category-list').innerHTML = categoryItem
+}
+
+
+
+
+
+
     var dropdownlist = '';
     category.forEach((obj, index)=> {
         dropdownlist += `<option>${obj}</option>`
@@ -187,9 +197,11 @@ function changePage(number){
     getProductList(selectedProducts)
 }
 
-function categoryFilter(category){
-    selectedCategory = category;
-    this.changePage(1)
+function categoryFilter(val){
+    selectedCategory = val;
+    document.getElementById(val).className="selected-category"
+    this.changePage(1);
+    this.getCategory();
 }
 
 
@@ -227,7 +239,7 @@ function getProductList(products, disableTopProductSort){
         </div>`
     })
 
-     products.forEach((obj, index)=> {
+     productList.forEach((obj, index)=> {
 
         if(obj.topProduct){
               topProducts += ` <section class="row py-2">
