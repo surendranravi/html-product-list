@@ -59,14 +59,13 @@ body {
   margin: 8px 0px;
   background: #f7f8fa;
   border-radius: 4px;
-  padding: 8px 16px;
 }
 
 .menu-list p {
   font-weight: 600;
   font-size: 0.9em;
   border-bottom: 1px solid #ddd;
-  padding-bottom: 4px;
+  padding: 8px 16px;
 }
 
 .product-list img {
@@ -138,5 +137,11 @@ body {
 }
 
 .pointer {
+  cursor: pointer;
+}
+
+.selected-category {
+  background-color: blue;
+  color: #fff;
   cursor: pointer;
 }
