@@ -14,8 +14,8 @@ var productList = [
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
-        name: "back Bag",
-        price: 700,
+        name: "back Bag Lenovo",
+        price: 1700,
         category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
@@ -30,15 +30,16 @@ var productList = [
         price: 700,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
-    }, {
+    }, 
+    {
         name: "nike shoe",
         price: 1500,
         category : "Shoes",
         imgUrl : "./images/shoe.jpg"
     },
      {
-        name: "Hoodie",
-        price: 400,
+        name: "Hoodie Limited Edition",
+        price: 500,
         category : "clothes",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
@@ -57,18 +58,48 @@ var productList = [
         imgUrl : "./images/slipper.jpg"
     },
      {
-        name: "wonderboom",
-        price: 700,
+        name: "wonderboom Type 2",
+        price: 900,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
+    },
+      {
+        name: "shoe",
+        price: 1500,
+        category : "Shoes",
+        imgUrl : "./images/shoe.4.jpg"
+    },
+     {
+        name: "Nike shoe",
+        price: 3900,
+        category : "Shoes",
+        imgUrl : "./images/shoe.5.jpg"
+    },
+     {
+        name: "shoe",
+        price: 900,
+        category : "Shoes",
+        imgUrl : "./images/shoe.4.jpg"
+    },
+     {
+        name: "shoe",
+        price: 1500,
+        category : "Shoes",
+        imgUrl : "./images/slipper2.jpeg"
+    },
+     {
+        name: "shoe",
+        price: 1500,
+        category : "Shoes",
+        imgUrl : "./images/shoe.4.jpg"
     }
 ];
 
-var category = ['Books', 'Shoes', 'Speakers', 'clothes','bag'];
+var category = ['All category' , 'Shoes', 'Speakers', 'clothes','bag'];
 
 var pageNo = 1;
 
-var selectedCategory;
+var selectedCategory = 'All category';
 
 var pageSize = 9;
 
@@ -80,17 +111,16 @@ function getCategory(){
     category.forEach((obj, index)=> {
         categoryItem += `<p class=${selectedCategory == obj ? "selected-category" : "pointer" } id='${obj}' onclick="categoryFilter('${obj}')">${obj}</p>`
     })
-    document.getElementById('category-list').innerHTML = categoryItem
-}
-
-
-
-
+        document.getElementById('category-list').innerHTML = categoryItem
+    }
 
 
     var dropdownlist = '';
     category.forEach((obj, index)=> {
-        dropdownlist += `<option>${obj}</option>`
+        if(obj !==  'All category'){
+             dropdownlist += `<option>${obj}</option>`
+        }
+       
     })
 document.getElementById('categoryListSelect').innerHTML = dropdownlist  
 
@@ -168,7 +198,13 @@ function getFileName(){
 function sortProduct(){
     var range = document.getElementById('sortingRange').value;
     var sortedProduct = [];
+
     let products =  JSON.parse(JSON.stringify(productList)) ;
+
+    if(selectedCategory !== "All category" && selectedCategory){
+        products =  products.filter(product => product.category === selectedCategory)
+    }
+   
     if(range == 'low'){
         sortedProduct = products.sort(function(a,b){
             return a.price - b.price;
@@ -191,17 +227,17 @@ function sortProduct(){
 function changePage(number){
     pageNo = number;
     let selectedProducts = productList
-    if(selectedCategory)
+    if(selectedCategory !== "All category" && selectedCategory){
         selectedProducts =  selectedProducts.filter(product => product.category === selectedCategory)
-
+    }
     getProductList(selectedProducts)
 }
 
 function categoryFilter(val){
     selectedCategory = val;
     document.getElementById(val).className="selected-category"
-    this.changePage(1);
-    this.getCategory();
+    changePage(1);
+    getCategory();
 }
 
 
@@ -209,7 +245,6 @@ function getProductList(products, disableTopProductSort){
     // Show Product List 
     var productItem = '';
     var topProducts = '';
-    console.log(products.length)
     let totalProduct = Math.ceil(products.length/pageSize);
     
     
