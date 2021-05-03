@@ -24,6 +24,9 @@
                     <h2>Products <button data-toggle="modal" data-target="#myModal">Add
                             Products</button></h2>
 
+                    <button data-toggle="modal" id="editModelViewBtn" class="d-none" data-target="#editModal">Add
+                        Products</button>
+
                 </div>
             </div>
         </div>
@@ -41,7 +44,7 @@
                     </div>
 
                     <p>Filter by Price:</p>
-                    <input type="range" min="1" max="100" value="50" class="slider" id="myRange">
+                    <input type="range" min="1" max="100" step="10" class="slider" id="myRange">
                     <button>filter</button><span class="float-right py-3">price $29-$599</span>
                     <h3>Top product </h3>
                     <div class="left-menu-2 my-5" id="top-products">
@@ -153,6 +156,73 @@
 
         </div>
     </div>
+
+    <!-- Edit Product -->
+
+    <div class="modal" id="editModal">
+
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+
+                <div class="mx-5 mt-5 mb-3">
+
+                    <h3 class="text-center">
+                        Edit Product </h3>
+
+                    <button class="popup-close-btn" data-dismiss="modal">
+                        X
+                    </button>
+                    <div class="form-group">
+                        <label for="exampleFormControlSelectEdit">Product category</label>
+                        <select class="form-control" id="categoryListSelectEdit">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="input-product-name">Product title</label>
+                        <input type="text" class="form-control btn-light" id="edit-product-name"
+                            aria-describedby="emailHelp" placeholder="enter product title">
+                        <sub id="error-msg-title" class="text-danger"></sub>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Price</label>
+                        <input type="number" class="form-control btn-light" id="edit-product-price"
+                            aria-describedby="emailHelp" placeholder="Enter price ">
+                        <sub id="error-msg-price" class="text-danger"></sub>
+                        <br>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="editTopProduct">
+                            <label class="form-check-label" for="flexCheckDefault">
+                                Top Product
+                            </label>
+                        </div>
+                        <br>
+                        <label for="exampleInputEmail1">Upload product image</label><br>
+                        <input type="file" class="d-none" id="edit-product-file" onchange="getFileName()"
+                            name="filename">
+                        <sub id="error-msg-file" class="text-danger"></sub>
+
+                        <p class="text-info" id="fileName"></p>
+                        <button class="btn btn-outline-danger btn-sm"
+                            onclick="document.getElementById('input-product-file').click()">Upload</button>
+                    </div>
+                    <p id="errormsg" class="text-center text-primary"></p>
+                    <hr>
+                    <div class="text-center">
+                        <button type="button" onclick="editProduct()" class="btn btn-light mx-4">OK</button>
+                        <button id="editCancelBtn" type="button" class="btn btn-danger mx-4"
+                            data-dismiss="modal">Cancel</button>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+        </div>
+    </div>
+
     </div>
     <script src="./js/main.js"></script>
 </body>

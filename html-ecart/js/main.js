@@ -1,5 +1,6 @@
 var productList = [
     {
+        productId : "p01",
         name: "bike shoe",
         price: 1500,
         topProduct: true,
@@ -7,6 +8,7 @@ var productList = [
         imgUrl : "./images/shoe.jpg"
     },
      {
+         productId : "p02",
         name: "Hoodie",
         price: 400,
         topProduct: true,
@@ -14,36 +16,42 @@ var productList = [
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
+        productId : "p03",
         name: "back Bag Lenovo",
         price: 1700,
         category: "bag",
         imgUrl : "./images/8853128773662.webp"
     },
      {
+         productId : "p04",
         name: "slipper",
         price: 300,
         category: "Shoes",
         imgUrl : "./images/slipper.jpg"
     },
      {
+         productId : "p05",
         name: "wonderboom",
         price: 700,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     }, 
     {
+        productId : "p06",
         name: "nike shoe",
         price: 1500,
         category : "Shoes",
         imgUrl : "./images/shoe.jpg"
     },
      {
+         productId : "p07",
         name: "Hoodie Limited Edition",
         price: 500,
         category : "clothes",
         imgUrl : "./images/hoddies-500x500.jpg"
     },
     {
+        productId : "p08",
         name: "back Bag",
         price: 700,
         topProduct: true,
@@ -51,6 +59,7 @@ var productList = [
         imgUrl : "./images/8853128773662.webp"
     },
      {
+         productId : "p09",
         name: "slipper",
         price: 300,
         topProduct: true,
@@ -58,36 +67,42 @@ var productList = [
         imgUrl : "./images/slipper.jpg"
     },
      {
+         productId : "p10",
         name: "wonderboom Type 2",
         price: 900,
         category: "Speakers",
         imgUrl : "./images/speaker.jpg"
     },
       {
+          productId : "p11",
         name: "shoe",
         price: 1500,
         category : "Shoes",
         imgUrl : "./images/shoe.4.jpg"
     },
      {
+         productId : "p12",
         name: "Nike shoe",
         price: 3900,
         category : "Shoes",
         imgUrl : "./images/shoe.5.jpg"
     },
      {
+         productId : "p13",
         name: "shoe",
         price: 900,
         category : "Shoes",
         imgUrl : "./images/shoe.4.jpg"
     },
      {
+         productId : "p14",
         name: "shoe",
         price: 1500,
         category : "Shoes",
         imgUrl : "./images/slipper2.jpeg"
     },
      {
+         productId : "p15",
         name: "shoe",
         price: 1500,
         category : "Shoes",
@@ -103,6 +118,7 @@ var selectedCategory = 'All category';
 
 var pageSize = 9;
 
+var editProductIndex = null
 
  this.getCategory();
 
@@ -123,6 +139,7 @@ function getCategory(){
        
     })
 document.getElementById('categoryListSelect').innerHTML = dropdownlist  
+document.getElementById('categoryListSelectEdit').innerHTML = dropdownlist
 
 document.getElementById("sortingRange").value = "default";
 document.getElementById('product-total').innerHTML = productList.length;
@@ -171,9 +188,10 @@ function addProduct(){
 
     reader.onloadend = () => {
         productList.push({
+            productId : 'pn' + productList.length,
             name: name,
             price: price,
-            category: "dress",
+            category: document.getElementById('categoryListSelect').value,
             topProduct : isTopProduct,
             imgUrl : reader.result
         })
@@ -188,6 +206,80 @@ function addProduct(){
     document.getElementById("cancelBtn").click();
     document.getElementById('topProduct').checked = false;
 }
+
+function editModelView(id){
+    let product = productList.findIndex((obj) => obj.productId === id );
+    editProductIndex = product;
+    product = productList[product];
+    document.getElementById("edit-product-name").value = product.name
+    document.getElementById("edit-product-price").value = product.price
+    document.getElementById('categoryListSelectEdit').value = product.category
+    document.getElementById('editModelViewBtn').click();
+}
+
+function editProduct(){
+  
+    let name = document.getElementById("edit-product-name").value;
+    let price= document.getElementById("edit-product-price").value
+    //let inputFile = document.getElementById("edit-product-file").files[0];
+    //let isTopProduct = document.getElementById('editTopProduct').checked 
+
+    if(!name){
+        document.getElementById("error-msg-title").innerHTML = "Please Enter the Title";
+        return
+    }
+     document.getElementById("error-msg-title").innerHTML = "";
+
+
+    if(!price){
+        document.getElementById("error-msg-price").innerHTML = "Please Enter the Price";
+        return
+    }
+    document.getElementById("error-msg-price").innerHTML = "";
+
+    // if(!inputFile){
+    //     document.getElementById("error-msg-file").innerHTML = "Please Upload the file";
+    //     return
+    // }
+
+    document.getElementById("error-msg-file").innerHTML = "";
+
+
+
+    let editObj = productList[editProductIndex]
+
+    editObj['name'] = name;
+    editObj['price'] = price
+
+    productList[editProductIndex] = editObj
+
+    getProductList(productList);
+
+
+    // const file = inputFile;
+    // const reader = new FileReader();
+
+    // reader.onloadend = () => {
+    //     productList.push({
+    //         productId : 'pn' + productList.length,
+    //         name: name,
+    //         price: price,
+    //         category: document.getElementById('categoryListSelect').value,
+    //         topProduct : isTopProduct,
+    //         imgUrl : reader.result
+    //     })
+    //     getProductList(productList);    
+    // };
+  //  reader.readAsDataURL(file);
+    document.getElementById("edit-product-name").value = null
+    document.getElementById("edit-product-price").value = null
+    //document.getElementById("edit-product-file").value = null ;
+    document.getElementById("errormsg").innerHTML = "";
+    document.getElementById('fileName').innerHTML = "";
+    document.getElementById("editCancelBtn").click();
+    document.getElementById('topProduct').checked = false;
+}
+
 
 function getFileName(){
     let file = document.getElementById('input-product-file')
@@ -263,7 +355,7 @@ function getProductList(products, disableTopProductSort){
     slicedproducts.forEach((obj, index)=> {
 
     productItem += `<div class="col-12 col-sm-4">
-                <div class="card mb-3">
+                <div class="card mb-3" onclick="editModelView('${obj.productId}');">
                 <img src=${obj.imgUrl} alt="Card image cap">
                 <div class="card-body text-center">
                     <h5>${obj.name}</h5>
@@ -307,6 +399,5 @@ function getProductList(products, disableTopProductSort){
 function uploadBtn(){
     document.getElementById("input-product-file").click()
 }
-
 
 
