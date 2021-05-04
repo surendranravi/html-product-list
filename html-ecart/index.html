@@ -11,8 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -199,13 +197,13 @@
                         </div>
                         <br>
                         <label for="exampleInputEmail1">Upload product image</label><br>
-                        <input type="file" class="d-none" id="edit-product-file" onchange="getFileName()"
-                            name="filename">
+                        <input type="file" class="d-none" id="edit-product-file" onchange="getEditFileName()"
+                            name="editFilename">
                         <sub id="error-msg-file" class="text-danger"></sub>
 
-                        <p class="text-info" id="fileName"></p>
+                        <p class="text-info" id="editFileName"></p>
                         <button class="btn btn-outline-danger btn-sm"
-                            onclick="document.getElementById('input-product-file').click()">Upload</button>
+                            onclick="document.getElementById('edit-product-file').click()">Upload</button>
                     </div>
                     <p id="errormsg" class="text-center text-primary"></p>
                     <hr>

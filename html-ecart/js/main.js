@@ -214,6 +214,7 @@ function editModelView(id){
     document.getElementById("edit-product-name").value = product.name
     document.getElementById("edit-product-price").value = product.price
     document.getElementById('categoryListSelectEdit').value = product.category
+    document.getElementById('editTopProduct').checked = product.topProduct
     document.getElementById('editModelViewBtn').click();
 }
 
@@ -221,7 +222,7 @@ function editProduct(){
   
     let name = document.getElementById("edit-product-name").value;
     let price= document.getElementById("edit-product-price").value
-    //let inputFile = document.getElementById("edit-product-file").files[0];
+    let inputFile = document.getElementById("edit-product-file").files[0];
     //let isTopProduct = document.getElementById('editTopProduct').checked 
 
     if(!name){
@@ -242,6 +243,9 @@ function editProduct(){
     //     return
     // }
 
+
+    
+
     document.getElementById("error-msg-file").innerHTML = "";
 
 
@@ -249,28 +253,32 @@ function editProduct(){
     let editObj = productList[editProductIndex]
 
     editObj['name'] = name;
-    editObj['price'] = price
+    editObj['price'] = price;
+    editObj['topProduct'] =  document.getElementById('editTopProduct').checked
 
-    productList[editProductIndex] = editObj
+    if(!inputFile){
+        productList[editProductIndex] = editObj
 
-    getProductList(productList);
+        getProductList(productList);
+    
+    }else{
+
+        const file = inputFile;
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+
+            editObj['imgUrl'] =  reader.result;
+            productList[editProductIndex] = editObj
+            
+            getProductList(productList);    
+        };
+        reader.readAsDataURL(file);
+
+    }
 
 
-    // const file = inputFile;
-    // const reader = new FileReader();
 
-    // reader.onloadend = () => {
-    //     productList.push({
-    //         productId : 'pn' + productList.length,
-    //         name: name,
-    //         price: price,
-    //         category: document.getElementById('categoryListSelect').value,
-    //         topProduct : isTopProduct,
-    //         imgUrl : reader.result
-    //     })
-    //     getProductList(productList);    
-    // };
-  //  reader.readAsDataURL(file);
     document.getElementById("edit-product-name").value = null
     document.getElementById("edit-product-price").value = null
     //document.getElementById("edit-product-file").value = null ;
@@ -284,7 +292,13 @@ function editProduct(){
 function getFileName(){
     let file = document.getElementById('input-product-file')
     document.getElementById('fileName').innerHTML = file.files[0].name
-     document.getElementById('error-msg-file').innerHTML = ""
+    document.getElementById('error-msg-file').innerHTML = ""
+}
+
+function getEditFileName(){
+    let file = document.getElementById('edit-product-file')
+    document.getElementById('editFileName').innerHTML = file.files[0].name
+    document.getElementById('error-msg-file').innerHTML = ""
 }
 
 function sortProduct(){
