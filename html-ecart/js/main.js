@@ -288,7 +288,7 @@ function editProduct(){
     document.getElementById('editFileName').innerHTML = "";
     document.getElementById("editCancelBtn").click();
     document.getElementById('topProduct').checked = false;
-
+    categoryFilter('All category')
 }
 
 
