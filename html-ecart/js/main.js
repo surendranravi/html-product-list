@@ -255,12 +255,14 @@ function editProduct(){
     editObj['name'] = name;
     editObj['price'] = price;
     editObj['topProduct'] =  document.getElementById('editTopProduct').checked
+    editObj['category'] = document.getElementById('categoryListSelectEdit').value
+
 
     if(!inputFile){
         productList[editProductIndex] = editObj
 
         getProductList(productList);
-    
+
     }else{
 
         const file = inputFile;
@@ -281,11 +283,12 @@ function editProduct(){
 
     document.getElementById("edit-product-name").value = null
     document.getElementById("edit-product-price").value = null
-    //document.getElementById("edit-product-file").value = null ;
+    document.getElementById("edit-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
-    document.getElementById('fileName').innerHTML = "";
+    document.getElementById('editFileName').innerHTML = "";
     document.getElementById("editCancelBtn").click();
     document.getElementById('topProduct').checked = false;
+
 }
 
 
