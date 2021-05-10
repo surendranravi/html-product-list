@@ -124,9 +124,13 @@ var priceSliderValue = 0;
 
 document.getElementById('priceRange').value = 0;
 
+var range = "default";
+
+document.getElementById("sortingRange").value = range;
+
 var updatedProduct = [];
 
-this.getCategory();
+getCategory();
 
 function getCategory(){     
      var categoryItem = '';
@@ -146,8 +150,6 @@ function getCategory(){
     })
 document.getElementById('categoryListSelect').innerHTML = dropdownlist  
 document.getElementById('categoryListSelectEdit').innerHTML = dropdownlist
-
-document.getElementById("sortingRange").value = "default";
 document.getElementById('product-total').innerHTML = productList.length;
 document.getElementById("input-product-file").value = null;
 document.getElementById("input-product-name").value  = null;
@@ -308,54 +310,64 @@ function getEditFileName(){
 }
 
 function sortProduct(){
-    var range = document.getElementById('sortingRange').value;
-    var sortedProduct = [];
+     range = document.getElementById('sortingRange').value;
 
-    let products =  JSON.parse(JSON.stringify(productList)) ;
-
-    if(selectedCategory !== "All category" && selectedCategory){
-        products =  products.filter(product => product.category === selectedCategory)
-    }
-   
-    if(range == 'low'){
-        sortedProduct = products.sort(function(a,b){
-            return a.price - b.price;
-            }
-        );
-    }
-    if(range == 'high'){
-        sortedProduct = products.sort(function(a,b){
-            return b.price - a.price;
-            }
-        );
-    }
-    if(range == "default"){
-        sortedProduct = productList
-    }
-
-    getProductList(sortedProduct, true);
+    getProductList(productList, true);
 }
 
 function changePage(number){
     pageNo = number;
-    let selectedProducts = productList
-    if(selectedCategory !== "All category" && selectedCategory){
-        selectedProducts =  selectedProducts.filter(product => product.category === selectedCategory)
-    }
-    getProductList(selectedProducts)
+    getProductList(productList)
 }
 
 function categoryFilter(val){
     selectedCategory = val;
     document.getElementById(val).className="selected-category"
-    changePage(1);
-    getCategory();
+     getCategory();
     document.getElementById('priceRange').value = 0;
-
+    changePage(1)
 }
 
 
 function getProductList(products, disableTopProductSort, disableUpdateProduct){
+
+
+    // Category Filter
+    if(selectedCategory !== "All category" && selectedCategory){
+        products =  products.filter(product => product.category === selectedCategory)
+    }
+
+
+
+     var sortedProduct  = JSON.parse(JSON.stringify(products))
+
+    // Range Sort
+
+    if(range == 'low'){
+        products = sortedProduct.sort(function(a,b){
+            return a.price - b.price;
+            }
+        );
+    }
+    if(range == 'high'){
+        products = sortedProduct.sort(function(a,b){
+            return b.price - a.price;
+            }
+        );
+    }
+
+    if(range == "default"){
+        products = products
+    }
+
+    console.log(products, selectedCategory)
+
+
+
+
+
+
+
     // Show Product List 
     var productItem = '';
     var topProducts = '';
@@ -450,8 +462,8 @@ function changePrice(){
       
 
     var filteredProduct = updatedProduct.filter((obj)=>  {
-        return  priceRangeValue > obj.price 
-    } )
+        return  priceRangeValue >= obj.price 
+    })
 
     getProductList(filteredProduct, null, true)
 }
