@@ -118,9 +118,15 @@ var selectedCategory = 'All category';
 
 var pageSize = 9;
 
-var editProductIndex = null
+var editProductIndex = null;
 
- this.getCategory();
+var priceSliderValue = 0;   
+
+document.getElementById('priceRange').value = 0;
+
+var updatedProduct = [];
+
+this.getCategory();
 
 function getCategory(){     
      var categoryItem = '';
@@ -244,10 +250,7 @@ function editProduct(){
     // }
 
 
-    
-
     document.getElementById("error-msg-file").innerHTML = "";
-
 
 
     let editObj = productList[editProductIndex]
@@ -347,10 +350,12 @@ function categoryFilter(val){
     document.getElementById(val).className="selected-category"
     changePage(1);
     getCategory();
+    document.getElementById('priceRange').value = 0;
+
 }
 
 
-function getProductList(products, disableTopProductSort){
+function getProductList(products, disableTopProductSort, disableUpdateProduct){
     // Show Product List 
     var productItem = '';
     var topProducts = '';
@@ -361,10 +366,29 @@ function getProductList(products, disableTopProductSort){
 
     var i;
     for (i = 0; i < totalProduct; i++) {
-        paginationList += `<li class="page-item"><button class="page-link" onclick="changePage(${i+1})">${i+1}</button></li>`;
+        if(pageNo === i+1){
+            paginationList += `<li class="page-item"><button class="page-link" style="border:1px solid #fa475a;  color:#fa475a;" onclick="changePage(${i+1})">${i+1}</button></li>`;
+  
+        }else{
+            paginationList += `<li class="page-item"><button class="page-link" style="border:1px solid #ccc; color:#ccc;" onclick="changePage(${i+1})">${i+1}</button></li>`;
+  
+        }
+   
     } 
 
     document.getElementById('pagination').innerHTML = paginationList;
+
+    if(!disableUpdateProduct){
+        updatedProduct = JSON.parse(JSON.stringify(products))
+
+        var maxPrice =  Math.max(...products.map((obj)=> obj.price));
+
+        document.getElementById('priceRange').max = maxPrice
+
+        document.getElementById("priceMax").innerHTML =  maxPrice
+       
+    }
+  
     
     let endPageNumber = pageNo * pageSize;
     let startPageNumber = endPageNumber - pageSize ;
@@ -372,7 +396,7 @@ function getProductList(products, disableTopProductSort){
     slicedproducts.forEach((obj, index)=> {
 
     productItem += `<div class="col-12 col-sm-4">
-                <div class="card mb-3" onclick="editModelView('${obj.productId}');">
+                <div class="card mb-3 box-shadow" onclick="editModelView('${obj.productId}');">
                 <img src=${obj.imgUrl} alt="Card image cap">
                 <div class="card-body text-center">
                     <h5>${obj.name}</h5>
@@ -399,6 +423,7 @@ function getProductList(products, disableTopProductSort){
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+                                <span style="font-size:13px;color:#ccc;">$${obj.price}</span>
                             </div>
                         </section>`
 
@@ -417,4 +442,17 @@ function uploadBtn(){
     document.getElementById("input-product-file").click()
 }
 
+
+function changePrice(){
+    var priceRangeValue = document.getElementById('priceRange').value;
+   
+    document.getElementById("priceMax").innerHTML =  priceRangeValue
+      
+
+    var filteredProduct = updatedProduct.filter((obj)=>  {
+        return  priceRangeValue > obj.price 
+    } )
+
+    getProductList(filteredProduct, null, true)
+}
 

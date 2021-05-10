@@ -42,8 +42,8 @@
                     </div>
 
                     <p>Filter by Price:</p>
-                    <input type="range" min="1" max="100" step="10" class="slider" id="myRange">
-                    <button>filter</button><span class="float-right py-3">price $29-$599</span>
+                    <input type="range" min="1" step="10" onchange="changePrice()"  class="slider" id="priceRange">
+                    <button>filter</button><span class="float-right py-3">price $0-$<span id="priceMax"></span></span>
                     <h3>Top product </h3>
                     <div class="left-menu-2 my-5" id="top-products">
                     </div>
@@ -121,7 +121,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Price</label>
                         <input type="number" class="form-control btn-light" id="input-product-price"
-                            aria-describedby="emailHelp" placeholder="Enter price ">
+                            aria-describedby="emailHelp" placeholder="Enter price">
                         <sub id="error-msg-price" class="text-danger"></sub>
                         <br>
                         <div class="form-check">
