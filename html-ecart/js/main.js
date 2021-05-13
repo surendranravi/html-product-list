@@ -425,7 +425,7 @@ function getProductList(products, disableTopProductSort, disableUpdateProduct){
         if(obj.topProduct){
               topProducts += ` <section class="row py-2">
                             <div class="col-4">
-                                <img src=${obj.imgUrl}>
+                                <img style="max-height:80px;object-fit: contain;" src=${obj.imgUrl}>
                             </div>
                             <div class="col-8">
                                 <h6>${obj.name}</h6>
@@ -460,7 +460,7 @@ function changePrice(){
     var priceRangeValue = document.getElementById('priceRange').value;
    
     document.getElementById("priceMax").innerHTML =  priceRangeValue
-      
+       
 
     var filteredProduct = updatedProduct.filter((obj)=>  {
         return  priceRangeValue >= obj.price 

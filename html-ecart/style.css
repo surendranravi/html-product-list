@@ -38,7 +38,8 @@ body {
 
 .left-menu-2 {
   height: 200px;
-  overflow: scroll;
+  overflow-x: hidden;
+  overflow-y: scroll;
 }
 
 .left-menu b {
