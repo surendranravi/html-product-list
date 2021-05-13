@@ -317,7 +317,7 @@ function sortProduct(){
 
 function changePage(number){
     pageNo = number;
-    getProductList(productList)
+    getProductList(productList, null, true)
 }
 
 function categoryFilter(val){
@@ -325,7 +325,8 @@ function categoryFilter(val){
     document.getElementById(val).className="selected-category"
      getCategory();
     document.getElementById('priceRange').value = 0;
-    changePage(1)
+    pageNo = 1;
+    getProductList(productList)
 }
 
 

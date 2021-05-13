@@ -36,6 +36,11 @@ body {
   color: #5c656a;
 }
 
+.left-menu-2 {
+  height: 200px;
+  overflow: scroll;
+}
+
 .left-menu b {
   color: #5c656a;
   font-weight: 600;
