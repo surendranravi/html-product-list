@@ -11,8 +11,6 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-
-
 </head>
 
 <body>
@@ -44,8 +42,8 @@
                     </div>
 
                     <p>Filter by Price:</p>
-                    <input type="range" min="1" max="100" step="10" class="slider" id="myRange">
-                    <button>filter</button><span class="float-right py-3">price $29-$599</span>
+                    <input type="range" min="0" onchange="changePrice()"  class="slider" id="priceRange">
+                    <button>filter</button><span class="float-right py-3">price $0-$<span id="priceMax"></span></span>
                     <h3>Top product </h3>
                     <div class="left-menu-2 my-5" id="top-products">
                     </div>
@@ -123,7 +121,7 @@
                     <div class="form-group">
                         <label for="exampleInputEmail1">Price</label>
                         <input type="number" class="form-control btn-light" id="input-product-price"
-                            aria-describedby="emailHelp" placeholder="Enter price ">
+                            aria-describedby="emailHelp" placeholder="Enter price">
                         <sub id="error-msg-price" class="text-danger"></sub>
                         <br>
                         <div class="form-check">
@@ -199,13 +197,13 @@
                         </div>
                         <br>
                         <label for="exampleInputEmail1">Upload product image</label><br>
-                        <input type="file" class="d-none" id="edit-product-file" onchange="getFileName()"
-                            name="filename">
+                        <input type="file" class="d-none" id="edit-product-file" onchange="getEditFileName()"
+                            name="editFilename">
                         <sub id="error-msg-file" class="text-danger"></sub>
 
-                        <p class="text-info" id="fileName"></p>
+                        <p class="text-info" id="editFileName"></p>
                         <button class="btn btn-outline-danger btn-sm"
-                            onclick="document.getElementById('input-product-file').click()">Upload</button>
+                            onclick="document.getElementById('edit-product-file').click()">Upload</button>
                     </div>
                     <p id="errormsg" class="text-center text-primary"></p>
                     <hr>

@@ -118,9 +118,19 @@ var selectedCategory = 'All category';
 
 var pageSize = 9;
 
-var editProductIndex = null
+var editProductIndex = null;
 
- this.getCategory();
+var priceSliderValue = 0;   
+
+document.getElementById('priceRange').value = 0;
+
+var range = "default";
+
+document.getElementById("sortingRange").value = range;
+
+var updatedProduct = [];
+
+getCategory();
 
 function getCategory(){     
      var categoryItem = '';
@@ -140,8 +150,6 @@ function getCategory(){
     })
 document.getElementById('categoryListSelect').innerHTML = dropdownlist  
 document.getElementById('categoryListSelectEdit').innerHTML = dropdownlist
-
-document.getElementById("sortingRange").value = "default";
 document.getElementById('product-total').innerHTML = productList.length;
 document.getElementById("input-product-file").value = null;
 document.getElementById("input-product-name").value  = null;
@@ -214,6 +222,7 @@ function editModelView(id){
     document.getElementById("edit-product-name").value = product.name
     document.getElementById("edit-product-price").value = product.price
     document.getElementById('categoryListSelectEdit').value = product.category
+    document.getElementById('editTopProduct').checked = product.topProduct
     document.getElementById('editModelViewBtn').click();
 }
 
@@ -221,7 +230,7 @@ function editProduct(){
   
     let name = document.getElementById("edit-product-name").value;
     let price= document.getElementById("edit-product-price").value
-    //let inputFile = document.getElementById("edit-product-file").files[0];
+    let inputFile = document.getElementById("edit-product-file").files[0];
     //let isTopProduct = document.getElementById('editTopProduct').checked 
 
     if(!name){
@@ -242,98 +251,124 @@ function editProduct(){
     //     return
     // }
 
-    document.getElementById("error-msg-file").innerHTML = "";
 
+    document.getElementById("error-msg-file").innerHTML = "";
 
 
     let editObj = productList[editProductIndex]
 
     editObj['name'] = name;
-    editObj['price'] = price
-
-    productList[editProductIndex] = editObj
-
-    getProductList(productList);
+    editObj['price'] = price;
+    editObj['topProduct'] =  document.getElementById('editTopProduct').checked
+    editObj['category'] = document.getElementById('categoryListSelectEdit').value
 
 
-    // const file = inputFile;
-    // const reader = new FileReader();
+    if(!inputFile){
+        productList[editProductIndex] = editObj
 
-    // reader.onloadend = () => {
-    //     productList.push({
-    //         productId : 'pn' + productList.length,
-    //         name: name,
-    //         price: price,
-    //         category: document.getElementById('categoryListSelect').value,
-    //         topProduct : isTopProduct,
-    //         imgUrl : reader.result
-    //     })
-    //     getProductList(productList);    
-    // };
-  //  reader.readAsDataURL(file);
+        getProductList(productList);
+
+    }else{
+
+        const file = inputFile;
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+
+            editObj['imgUrl'] =  reader.result;
+            productList[editProductIndex] = editObj
+            
+            getProductList(productList);    
+        };
+        reader.readAsDataURL(file);
+
+    }
+
+
+
     document.getElementById("edit-product-name").value = null
     document.getElementById("edit-product-price").value = null
-    //document.getElementById("edit-product-file").value = null ;
+    document.getElementById("edit-product-file").value = null ;
     document.getElementById("errormsg").innerHTML = "";
-    document.getElementById('fileName').innerHTML = "";
+    document.getElementById('editFileName').innerHTML = "";
     document.getElementById("editCancelBtn").click();
     document.getElementById('topProduct').checked = false;
+    categoryFilter('All category')
 }
 
 
 function getFileName(){
     let file = document.getElementById('input-product-file')
     document.getElementById('fileName').innerHTML = file.files[0].name
-     document.getElementById('error-msg-file').innerHTML = ""
+    document.getElementById('error-msg-file').innerHTML = ""
+}
+
+function getEditFileName(){
+    let file = document.getElementById('edit-product-file')
+    document.getElementById('editFileName').innerHTML = file.files[0].name
+    document.getElementById('error-msg-file').innerHTML = ""
 }
 
 function sortProduct(){
-    var range = document.getElementById('sortingRange').value;
-    var sortedProduct = [];
+     range = document.getElementById('sortingRange').value;
 
-    let products =  JSON.parse(JSON.stringify(productList)) ;
-
-    if(selectedCategory !== "All category" && selectedCategory){
-        products =  products.filter(product => product.category === selectedCategory)
-    }
-   
-    if(range == 'low'){
-        sortedProduct = products.sort(function(a,b){
-            return a.price - b.price;
-            }
-        );
-    }
-    if(range == 'high'){
-        sortedProduct = products.sort(function(a,b){
-            return b.price - a.price;
-            }
-        );
-    }
-    if(range == "default"){
-        sortedProduct = productList
-    }
-
-    getProductList(sortedProduct, true);
+    getProductList(productList, true);
 }
 
 function changePage(number){
     pageNo = number;
-    let selectedProducts = productList
-    if(selectedCategory !== "All category" && selectedCategory){
-        selectedProducts =  selectedProducts.filter(product => product.category === selectedCategory)
-    }
-    getProductList(selectedProducts)
+    getProductList(productList, null, true)
 }
 
 function categoryFilter(val){
     selectedCategory = val;
     document.getElementById(val).className="selected-category"
-    changePage(1);
-    getCategory();
+     getCategory();
+    document.getElementById('priceRange').value = 0;
+    pageNo = 1;
+    getProductList(productList)
 }
 
 
-function getProductList(products, disableTopProductSort){
+function getProductList(products, disableTopProductSort, disableUpdateProduct){
+
+
+    // Category Filter
+    if(selectedCategory !== "All category" && selectedCategory){
+        products =  products.filter(product => product.category === selectedCategory)
+    }
+
+
+
+     var sortedProduct  = JSON.parse(JSON.stringify(products))
+
+    // Range Sort
+
+    if(range == 'low'){
+        products = sortedProduct.sort(function(a,b){
+            return a.price - b.price;
+            }
+        );
+    }
+    if(range == 'high'){
+        products = sortedProduct.sort(function(a,b){
+            return b.price - a.price;
+            }
+        );
+    }
+
+    if(range == "default"){
+        products = products
+    }
+
+    console.log(products, selectedCategory)
+
+
+
+
+
+
+
     // Show Product List 
     var productItem = '';
     var topProducts = '';
@@ -344,10 +379,29 @@ function getProductList(products, disableTopProductSort){
 
     var i;
     for (i = 0; i < totalProduct; i++) {
-        paginationList += `<li class="page-item"><button class="page-link" onclick="changePage(${i+1})">${i+1}</button></li>`;
+        if(pageNo === i+1){
+            paginationList += `<li class="page-item"><button class="page-link" style="border:1px solid #fa475a;  color:#fa475a;" onclick="changePage(${i+1})">${i+1}</button></li>`;
+  
+        }else{
+            paginationList += `<li class="page-item"><button class="page-link" style="border:1px solid #ccc; color:#ccc;" onclick="changePage(${i+1})">${i+1}</button></li>`;
+  
+        }
+   
     } 
 
     document.getElementById('pagination').innerHTML = paginationList;
+
+    if(!disableUpdateProduct){
+        updatedProduct = JSON.parse(JSON.stringify(products))
+
+        var maxPrice =  Math.max(...products.map((obj)=> obj.price));
+
+        document.getElementById('priceRange').max = maxPrice
+
+        document.getElementById("priceMax").innerHTML =  maxPrice
+       
+    }
+  
     
     let endPageNumber = pageNo * pageSize;
     let startPageNumber = endPageNumber - pageSize ;
@@ -355,7 +409,7 @@ function getProductList(products, disableTopProductSort){
     slicedproducts.forEach((obj, index)=> {
 
     productItem += `<div class="col-12 col-sm-4">
-                <div class="card mb-3" onclick="editModelView('${obj.productId}');">
+                <div class="card mb-3 box-shadow" onclick="editModelView('${obj.productId}');">
                 <img src=${obj.imgUrl} alt="Card image cap">
                 <div class="card-body text-center">
                     <h5>${obj.name}</h5>
@@ -371,7 +425,7 @@ function getProductList(products, disableTopProductSort){
         if(obj.topProduct){
               topProducts += ` <section class="row py-2">
                             <div class="col-4">
-                                <img src=${obj.imgUrl}>
+                                <img style="max-height:80px;object-fit: contain;" src=${obj.imgUrl}>
                             </div>
                             <div class="col-8">
                                 <h6>${obj.name}</h6>
@@ -382,6 +436,7 @@ function getProductList(products, disableTopProductSort){
                                     <i class="fa fa-star"></i>
                                     <i class="fa fa-star"></i>
                                 </div>
+                                <span style="font-size:13px;color:#ccc;">$${obj.price}</span>
                             </div>
                         </section>`
 
@@ -400,4 +455,17 @@ function uploadBtn(){
     document.getElementById("input-product-file").click()
 }
 
+
+function changePrice(){
+    var priceRangeValue = document.getElementById('priceRange').value;
+   
+    document.getElementById("priceMax").innerHTML =  priceRangeValue
+       
+
+    var filteredProduct = updatedProduct.filter((obj)=>  {
+        return  priceRangeValue >= obj.price 
+    })
+
+    getProductList(filteredProduct, null, true)
+}
 
