@@ -1,22 +1,32 @@
+:root {
+    --backgroud-color: #fff;
+    --primary-color: #ffffff;
+    --secondary-color:  #fafafa;
+    --card-bg-color: #fff;
+  }
+
 body {
-    background-color: #fafafa;
-    /* color: #fff; */
+    background-color: var(--backgroud-color);
 }
 
 .header{
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     padding: 16px 0px;
     font-weight: bold;
-    -webkit-box-shadow: 0 4px 3px -3px #ddd;
-       -moz-box-shadow: 0 4px 3px -3px #ddd;
-            box-shadow: 0 4px 3px -3px #ddd;
+    -webkit-box-shadow: 0 4px 3px -3px rgba(0,0,0,0.45);;
+       -moz-box-shadow: 0 4px 3px -3px rgba(0,0,0,0.45);;
+            box-shadow: 0 4px 3px -3px rgba(0,0,0,0.45);;
 }
 
 .box{
-    background-color: #fff;
+    background-color: var(--card-bg-color);
     box-shadow: 0px 3px 3px -1px rgba(0,0,0,0.45);
   -webkit-box-shadow: 0px 3px 3px -1px rgba(0,0,0,0.45);
   -moz-box-shadow: 0px 3px 3px -1px rgba(0,0,0,0.45);
+}
+
+.box-dark {
+    background-color: #fff;
 }
 
 .box img{
