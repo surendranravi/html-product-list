@@ -3,17 +3,10 @@ var countryList = [];
 var searchCountry = '';
 var regionList = [];
 var selectedRegion = '';
-var darkMode = false;
 
 document.getElementById('searchInput').value = searchCountry;
 
 var countryList = [];
-
-
-var r = document.querySelector(':root');
-
-changeMode();
-
 
 
 fetch('https://restcountries.eu/rest/v2/all').then((res)=> {
@@ -33,23 +26,6 @@ fetch('https://restcountries.eu/rest/v2/all').then((res)=> {
     })
 })
 
-
-
-
-function changeMode(){
-  if(darkMode){
-    document.getElementById('modeBtn').innerHTML = `<span style="color:#f1f7fa;"><i class="fa fa-moon" aria-hidden="true" ></i> Dark Mode</span>`;
-    r.style.setProperty('--backgroud-color', '#212d36');
-    r.style.setProperty('--card-bg-color', '#2b3743');
-    document.body.style.color = "#f1f7fa";
-  }else{
-    document.getElementById('modeBtn').innerHTML = `<span style="color:#16171b;"><i class="fa fa-moon-o" aria-hidden="true"></i> Dark Mode</span>`
-    r.style.setProperty('--backgroud-color', '#fafafa');
-    r.style.setProperty('--card-bg-color', '#fff');
-    document.body.style.color = "#16171b";
-  }
-  darkMode = !darkMode
-}
 
 
 function searchCountryList(value){
@@ -81,7 +57,8 @@ function showCountryList(data){
 
         listItem += `  <div class="col-md-3 d-flex mb-4">
         <div class="box">
-        <img src="${obj.flag}">
+        <a href="country.html?code=${obj.callingCodes[0]}">
+        <img src="${obj.flag}"/></a> 
         <div class="m-3">
           <b class="mb-2">${obj.name}</b><br>
           <span style="font-weight: 500;">Population: <span style="font-weight: 400;color: #a7b1be;">${obj.population}</span></span><br>

@@ -13,7 +13,7 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </head>
 
-<body>  
+<body>
   <div class="header"> 
     <div class="container">
       <div class="row">
@@ -27,33 +27,16 @@
   </div>
 
   <div class="container my-4">
-
-    <div class="row">
-      <div class="col-12 col-sm-3">
-        <input type="text" id="searchInput" class="form-control" style="opacity: 0.4;" onkeydown="searchCountryList(this.value);" placeholder="Search for a country..."  aria-describedby="basic-addon1">
-        <br>
+      <button class="btn btn-outline-secondary" onclick="window.history.back();"><i class="fa fa-arrow-left"></i> Back</button>
+      <br><br>
+      <div class="row" id="viewList">
       </div>
-      <div class="col-sm-7">
-      </div>
-      <div class="col-sm-2">
-        <select class="w-100" id="region-options" style="opacity: 0.4;" onchange="searchByregion(this.value);"  aria-label="Default select example">
-          
-        </select>
-      </div>
-    </div>
+   </div>   
+      
 
-  </div>
-
-  <div class="container">
-    <div id="country-item" class="row">
-     
-
-    </div>
-
-  </div>
   <script src="js/darkMode.js"></script>  
-  <script src="js/main.js"></script>
- 
+  <script src="js/getDetails.js"></script>
+
 </body>
 
 </html> 
