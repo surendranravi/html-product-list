@@ -4,7 +4,6 @@ var r = document.querySelector(':root');
 this.changeMode();
 
 function changeMode(){
-    console.log(darkMode)
     if(darkMode){
       document.getElementById('modeBtn').innerHTML = `<span style="color:#f1f7fa;"><i class="fa fa-moon" aria-hidden="true" ></i> Dark Mode</span>`;
       r.style.setProperty('--backgroud-color', '#212d36');
