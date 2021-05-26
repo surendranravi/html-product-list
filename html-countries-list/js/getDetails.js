@@ -59,5 +59,5 @@ fetch('https://restcountries.eu/rest/v2/all').then((res)=> {
 function navToCountry(params) {
   let countryCode = countryList.filter((obj)=> obj.alpha3Code == params )
   countryCode = countryCode[0].callingCodes[0]
-  window.location.href = '/country.html?code=' + countryCode
+  window.location.href = 'country.html?code=' + countryCode
 }
