@@ -58,7 +58,7 @@ function showCountryList(data){
         listItem += `  <div class="col-md-3 d-flex mb-4">
         <div class="box">
         <a href="country.html?code=${obj.callingCodes[0]}">
-        <img src="${obj.flag}"/></a> 
+        <img class="img-size" src="${obj.flag}"/></a> 
         <div class="m-3">
           <b class="mb-2">${obj.name}</b><br>
           <span style="font-weight: 500;">Population: <span style="font-weight: 400;color: #a7b1be;">${obj.population}</span></span><br>

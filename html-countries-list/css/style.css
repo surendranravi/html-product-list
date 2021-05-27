@@ -29,9 +29,12 @@ body {
     background-color: #fff;
 }
 
-.box img{
+.box img {
     width: 100%;
 }
 
-
+.img-size {
+    height: 180px;
+    object-fit: cover;
+}
 
