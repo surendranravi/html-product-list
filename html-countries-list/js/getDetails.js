@@ -16,7 +16,7 @@ fetch('https://restcountries.eu/rest/v2/callingcode/' + code ).then((res)=> {
 
         document.getElementById('viewList').innerHTML = `
         <div class="col-12 col-sm-6">
-        <img class="w-100" src="${res.flag}">
+        <img class="w-100" style="height:350px;object-fit:contain;" src="${res.flag}">
         <br><br>
       </div>
       <div class="col-12 col-sm-6">
